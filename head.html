@@ -1,0 +1,42 @@
+<link rel="stylesheet" href="/style.css"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+<script src="https://d6uhzlpot4xwe.cloudfront.net/runtime/1.21/themes/wiper-fonts.gz.js"></script>
+<script src="/scrani.js"></script>
+<script>
+
+  function decoratePage() {
+    if (document.querySelector('main>div').className=='') {
+      document.querySelectorAll('main>div').forEach(($div, i) => {
+        if (i==0 && $div.querySelector(':scope>*:first-child>img')) {
+          const $h1=$div.querySelector('h1');
+          const $p=$div.querySelector('p:nth-of-type(2)');
+          $div.classList.add('title');
+          $divHeader=document.createElement('div');
+          $divHeader.classList.add('header');
+          $div.appendChild($divHeader);
+          if ($h1) $divHeader.appendChild($h1);
+          if ($p) $divHeader.appendChild($p);
+        } else {
+          $div.classList.add(($div.firstElementChild && $div.firstElementChild.tagName=='IMG')?'image':'default');
+        }
+      });
+    }
+  }
+
+  window.addEventListener('DOMContentLoaded', (evt) => {
+    decoratePage();
+  })
+
+  window.onload = function() {
+    scrani.onload();
+  }
+
+  window.onhashchange = function() {
+    if (window.location.hash === "#menu") {
+      document.querySelector("header div:nth-child(2)").style="display:block";
+    } else {
+      document.querySelector("header div:nth-child(2)").style="";
+    }
+  }
+</script>
